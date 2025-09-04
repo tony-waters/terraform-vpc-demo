@@ -1,3 +1,6 @@
+#
+# vpc
+#
 
 resource "aws_vpc" "main" {
   cidr_block = var.cidr_block
@@ -6,6 +9,10 @@ resource "aws_vpc" "main" {
     Name = "Main VPC"
   }
 }
+
+#
+# subnets
+#
 
 resource "aws_subnet" "public" {
   vpc_id = aws_vpc.main.id
@@ -30,6 +37,11 @@ resource "aws_subnet" "private" {
     Name = "Private Subnet ${count.index +1}"
   }
 }
+
+#
+# internet gateway & route table
+#
+
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
