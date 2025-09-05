@@ -22,3 +22,21 @@ variable "private_subnet_cidrs" {
  description = "Private Subnet CIDR values"
  default     = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
 }
+
+variable "ec2_ami" {
+  type = string
+  description = "AMI to use for EC2 instances"
+  default = "ami-0cfb394ad3c3ac699"
+}
+
+variable "ec2_instance_type" {
+  type = string
+  description = "Instance Type to use for EC2 instances"
+  default = "t3.micro"
+}
+
+variable "ec2_key_pair_name" {
+  type = string
+  description = "AWS Key Pair to use with EC2"
+  default = "ec2_ssh"
+}
