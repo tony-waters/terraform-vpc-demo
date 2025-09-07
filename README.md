@@ -1,11 +1,20 @@
 # terraform-vpc-demo
 
+## themes
+
+- create a AWS VPC with public and private networks (subnets)
+- demonstrate basic connectivity/routing, specifically:
+  - ssh into a server on the public network
+  - from there ssh into a private network server
+  - use servers to access the internet
+
 ## objectives
 
 - Create a VPC
 - deploy a public and private server
 - access the public server using ssh
 - access the private server from the public server using ssh
+- servers can run 'yum update'
 
 ## ingredients
 
