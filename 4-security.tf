@@ -23,6 +23,26 @@ resource "aws_security_group" "ec2_public" {
   }
 }
 
+resource "aws_security_group" "ec2_private" {
+  name        = "ec2-private"
+  description = "Allow SSH and egress"
+  vpc_id      = aws_vpc.main.id
+
+  ingress {
+    from_port         = 22
+    to_port           = 22
+    protocol          = "tcp"
+    cidr_blocks       = [var.cidr_block]
+  }
+
+  egress {
+    from_port         = 0
+    to_port           = 0
+    protocol          = "-1"
+    cidr_blocks       = ["0.0.0.0/0"]
+  }
+}
+
 #
 # security rules
 #

@@ -24,7 +24,7 @@ resource "aws_instance" "private_ec2" {
   instance_type = var.ec2_instance_type
   subnet_id = aws_subnet.private[0].id
   key_name = var.ec2_key_pair_name
-  # security_groups = [aws_security_group.ec2_private.id]
+  security_groups = [aws_security_group.ec2_private.id]
   associate_public_ip_address = false
 
   tags = {
