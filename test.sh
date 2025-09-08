@@ -8,8 +8,10 @@ sudo scp -i ~/.ssh/ec2_ssh.pem ~/.ssh/ec2_ssh.pem ec2-user@$public_ec2_ip:/home/
 
 # should be able to ssh into private ec2 from public ec2
 echo "*** You are about to ssh into the Public EC2"
+echo "*** Check internet availability from Public subnet by doing 'sudo yum update'"
 echo "*** Run the following command to ssh into the Private EC2 from there"
 echo "*** ssh -i \"ec2_ssh.pem\" ec2-user@$private_ec2_ip"
+echo "*** Check internet availability from Private subnet by doing 'sudo yum update'"
 
 # ssh into public ec2
 ssh -i "~/.ssh/ec2_ssh.pem" ec2-user@$public_ec2_ip
