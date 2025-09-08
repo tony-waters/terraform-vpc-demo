@@ -30,6 +30,25 @@ resource "aws_route_table_association" "public_subnet" {
   subnet_id = aws_subnet.public[count.index].id
 }
 
+#
+# NAT gateway & Elastic IP (EIP) & route table
+#
+
+resource "aws_eip" "eip" {
+  domain = "vpc"
+}
+
+resource "aws_nat_gateway" "nat" {
+  allocation_id = aws_eip.eip.id
+  subnet_id = aws_subnet.public[0].id
+
+  tags = {
+    Name = "NAT in Public subnet 0"
+  }
+
+  depends_on = [aws_internet_gateway.main]
+}
+
 resource "aws_route_table" "private_route_table" {
   vpc_id = aws_vpc.main.id
 
@@ -48,23 +67,4 @@ resource "aws_route_table_association" "private_subnet" {
 
   count = length(var.private_subnet_cidrs)
   subnet_id = aws_subnet.private[count.index].id
-}
-
-#
-# NAT gateway & Elastic IP (EIP)
-#
-
-resource "aws_eip" "eip" {
-  domain = "vpc"
-}
-
-resource "aws_nat_gateway" "nat" {
-  allocation_id = aws_eip.eip.id
-  subnet_id = aws_subnet.public[0].id
-
-  tags = {
-    Name = "NAT in Public subnet 0"
-  }
-
-  depends_on = [aws_internet_gateway.main]
 }
