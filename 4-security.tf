@@ -15,6 +15,13 @@ resource "aws_security_group" "ec2_public" {
     cidr_blocks       = ["0.0.0.0/0"]
   }
 
+  ingress {
+    from_port   = 8 # the ICMP type number for 'Echo'
+    to_port     = 0 # the ICMP code
+    protocol    = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port         = 0
     to_port           = 0
